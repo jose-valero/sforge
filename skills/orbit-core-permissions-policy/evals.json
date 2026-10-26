@@ -1,0 +1,26 @@
+{
+  "cases": [
+    {
+      "prompt": "¿Debería darle allow vacío a mi agente orquestador?",
+      "should_trigger": true,
+      "why": "es la política recomendada central de esta skill"
+    },
+    {
+      "prompt": "Un archivo que no estaba en mi allow quedó modificado después de la llamada, ¿qué hago?",
+      "should_trigger": true,
+      "why": "manejo de brechas de permisos, cubierto aquí"
+    },
+    {
+      "prompt": "Quiero que esta tarea corra en su propia copia del repo, separada de main",
+      "should_trigger": false,
+      "route_to": "orbit-core-worktree-isolation",
+      "why": "es aislamiento físico, no política de qué puede escribir el agente"
+    },
+    {
+      "prompt": "¿Cómo estructuro los reintentos de esta fase si el gate falla?",
+      "should_trigger": false,
+      "route_to": "orbit-core-phase-design",
+      "why": "mecánica de fase/retries, no permisos de escritura"
+    }
+  ]
+}

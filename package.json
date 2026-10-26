@@ -1,0 +1,28 @@
+{
+  "name": "orbit-core",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Capa 1 de orbit-core: motor de orquestacion agnostico de dominio (Phase / Envelope / Gate / Permisos / Trace).",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "example": "tsx examples/hello-pipeline.ts",
+    "example:capa0": "tsx examples/capa0-router.ts",
+    "example:capa2": "tsx examples/capa2-worktree.ts",
+    "example:capa3": "tsx examples/capa3-catalog.ts",
+    "example:capa0-live": "tsx examples/capa0-live.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "js-yaml": "^5.5.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
