@@ -17,6 +17,12 @@ sección 5.
 - **`removeWorktree(handle, opts)`** — `git worktree remove` + `git branch -D` forzado (tras un
   merge con squash/rebase, `-d` sin forzar se niega aunque la rama ya esté integrada — documentado
   en el Laboratorio C, reproducido aquí tal cual).
+- **`createWorktree({ linkNodeModules: true })`** — enlaza (symlink) `node_modules` del repo
+  principal dentro del worktree. Sin esto, cualquier import a un paquete npm real (no solo librerías
+  propias del repo) falla con `ERR_MODULE_NOT_FOUND` dentro del worktree — un worktree es un
+  checkout git nuevo, y git no versiona `node_modules`. Encontrado corriendo el pipeline real contra
+  `envelope.ts` (que importa `zod`): el agente escribió un test correcto, pero la infraestructura del
+  worktree no lo dejó correr. Opt-in (default `false`) porque no todo proyecto usa npm.
 
 ## Decisión de diseño que cambió al correr el ejemplo (no solo al escribirlo)
 

@@ -7,6 +7,8 @@
 
 import { execFile } from "node:child_process";
 import { randomBytes } from "node:crypto";
+import { existsSync } from "node:fs";
+import { symlink } from "node:fs/promises";
 import { basename, dirname, isAbsolute, join } from "node:path";
 import { promisify } from "node:util";
 
@@ -41,6 +43,15 @@ export interface CreateWorktreeOptions {
    * se usa tal cual. Default: directorio hermano "<repo>.worktrees".
    */
   worktreesDir?: string;
+  /**
+   * Enlaza (symlink) `node_modules` del repo principal dentro del worktree
+   * recien creado, si existe. Un worktree es un checkout git nuevo — git no
+   * versiona `node_modules`, asi que sin esto cualquier import a un paquete
+   * npm (incluso uno que el propio codigo del repo ya usa, como `zod`) falla
+   * con `ERR_MODULE_NOT_FOUND` dentro del worktree. Default: false (no todo
+   * proyecto es Node/npm).
+   */
+  linkNodeModules?: boolean;
 }
 
 function slugify(input: string): string {
@@ -93,6 +104,13 @@ export async function createWorktree(opts: CreateWorktreeOptions): Promise<Workt
   await execFileAsync("git", ["worktree", "add", worktreePath, "-b", branch, baseRef], {
     cwd: opts.repoPath,
   });
+
+  if (opts.linkNodeModules) {
+    const source = join(opts.repoPath, "node_modules");
+    if (existsSync(source)) {
+      await symlink(source, join(worktreePath, "node_modules"), "dir");
+    }
+  }
 
   return { path: worktreePath, branch, taskName: taskSlug, baseRef, repoPath: opts.repoPath };
 }

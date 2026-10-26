@@ -48,7 +48,15 @@ const main = async () => {
   }
 
   // --- 1. Capa 2: aislamiento fisico ---
-  const wt = await createWorktree({ repoPath, taskName: `tests unitarios para ${MODULE}.ts` });
+  // linkNodeModules: el modulo bajo prueba puede importar paquetes npm
+  // (envelope.ts usa zod) — sin el symlink, el gate de tests fallaria con
+  // ERR_MODULE_NOT_FOUND por una razon de infraestructura, no por el
+  // trabajo del agente (encontrado corriendo esto en vivo contra envelope.ts).
+  const wt = await createWorktree({
+    repoPath,
+    taskName: `tests unitarios para ${MODULE}.ts`,
+    linkNodeModules: true,
+  });
   console.log(`\n[worktree] ${wt.path}`);
   console.log(`[worktree] rama: ${wt.branch}`);
 
