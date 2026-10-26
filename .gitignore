@@ -4,3 +4,6 @@ dist/
 *.db-wal
 *.db-shm
 /null
+# generado por `npm run example:capa3` (scanSkills + buildManifest) — cambia
+# de timestamp en cada corrida, no tiene sentido versionarlo
+/skills/manifest.json
