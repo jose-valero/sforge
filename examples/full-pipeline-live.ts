@@ -108,18 +108,23 @@ const main = async () => {
   console.log(`\n[builder] ${envelope.summary}`);
   console.log(`[builder] archivos declarados: ${envelope.filesWritten.join(", ")}`);
 
-  // --- 3. gate real: correr los tests que el agente escribio, de verdad ---
-  // El worktree es un checkout limpio sin node_modules propio; el test file
-  // sigue la convencion del repo (imports con extension .js sobre fuentes
-  // .ts), que `tsx` resuelve. Se invoca el binario de tsx del repo
-  // PRINCIPAL por ruta absoluta — no hace falta `npm install` por worktree.
+  // --- 3. gates reales: typecheck Y tests, no solo uno ---
+  // Una corrida real encontro que "tests pasan" no bastaba: el agente, sin
+  // poder verificar su propio trabajo, uso un import con extension .ts
+  // (valido para tsx en ejecucion, invalido para tsc --noEmit). El gate
+  // original solo corria tests y no lo detecto. El worktree es un checkout
+  // limpio sin node_modules propio — se invocan los binarios del repo
+  // PRINCIPAL por ruta absoluta (no hace falta `npm install` por worktree).
   const tsxBin = join(repoPath, "node_modules", ".bin", "tsx");
-  const [testGate] = await runGates(undefined, [
+  const tscBin = join(repoPath, "node_modules", ".bin", "tsc");
+  const [typecheckGate, testGate] = await runGates(undefined, [
+    testsPass([tscBin, "--noEmit"], { cwd: wt.path }),
     testsPass([tsxBin, "--test", TEST_FILE_REL], { cwd: wt.path }),
   ]);
-  console.log(`\n[gate] tsx --test ${TEST_FILE_REL} -> passed=${testGate!.passed}`);
-  if (!testGate!.passed) {
-    throw new Error("los tests que escribio el agente NO pasan — el pipeline rechaza el resultado");
+  console.log(`\n[gate] tsc --noEmit -> passed=${typecheckGate!.passed}`);
+  console.log(`[gate] tsx --test ${TEST_FILE_REL} -> passed=${testGate!.passed}`);
+  if (!typecheckGate!.passed || !testGate!.passed) {
+    throw new Error("typecheck o tests fallaron — el pipeline rechaza el resultado");
   }
 
   // --- 4. permisos: confirmar que solo toco el archivo esperado ---

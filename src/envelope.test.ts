@@ -1,7 +1,7 @@
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
 import { z } from "zod";
-import { EnvelopeBase, defineEnvelope, EnvelopeParseError, parseEnvelope } from "./envelope.ts";
+import { EnvelopeBase, defineEnvelope, EnvelopeParseError, parseEnvelope } from "./envelope.js";
 
 describe("EnvelopeBase", () => {
   test("acepta status success y fail con summary", () => {

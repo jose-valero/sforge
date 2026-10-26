@@ -5,7 +5,7 @@ import { mkdtempSync, writeFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 // @ts-ignore -- el import con extension .ts es necesario para strip-types nativo
-import { envelopeSucceeded, filesExist, filesNonEmpty, testsPass, runGates, type Gate } from "./gate.ts";
+import { envelopeSucceeded, filesExist, filesNonEmpty, testsPass, runGates, type Gate } from "./gate.js";
 
 function fixtureDir() {
   const dir = mkdtempSync(join(tmpdir(), "gate-test-"));
