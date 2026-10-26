@@ -80,10 +80,16 @@ const main = async () => {
   console.log(`[builder] archivos declarados: ${envelope.filesWritten.join(", ")}`);
 
   // --- 3. gate real: correr los tests que el agente escribio, de verdad ---
+  // El worktree es un checkout limpio sin node_modules propio; el test file
+  // sigue la convencion del repo (imports con extension .js sobre fuentes
+  // .ts), que `tsx` resuelve pero el `--experimental-strip-types` nativo de
+  // Node no. Se invoca el binario de tsx del repo PRINCIPAL por ruta
+  // absoluta — no hace falta `npm install` dentro de cada worktree.
+  const tsxBin = join(repoPath, "node_modules", ".bin", "tsx");
   const [testGate] = await runGates(undefined, [
-    testsPass(["node", "--experimental-strip-types", "--test", TEST_FILE_REL], { cwd: wt.path }),
+    testsPass([tsxBin, "--test", TEST_FILE_REL], { cwd: wt.path }),
   ]);
-  console.log(`\n[gate] node --test ${TEST_FILE_REL} -> passed=${testGate!.passed}`);
+  console.log(`\n[gate] tsx --test ${TEST_FILE_REL} -> passed=${testGate!.passed}`);
   if (!testGate!.passed) {
     throw new Error("los tests que escribio el agente NO pasan — el pipeline rechaza el resultado");
   }
