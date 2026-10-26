@@ -20,3 +20,6 @@ export * from "./catalog/types.js";
 export * from "./catalog/parse.js";
 export * from "./catalog/manifest.js";
 export * from "./catalog/evals.js";
+
+// Observabilidad — visor en vivo del Trace
+export * from "./observability/trace-server.js";
