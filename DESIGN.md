@@ -1,7 +1,7 @@
 # Capa 1 — decisiones de diseño
 
-Este paquete es la primera pieza real de `orbit-core` (ver [`../sintesis-orbit-core.md`](../sintesis-orbit-core.md)
-y [`../investigacion/laboratorio-a-motor-de-fases.md`](../investigacion/laboratorio-a-motor-de-fases.md)). Implementa
+Este paquete es la primera pieza real de `orbit-core` (ver [`./docs/sintesis-orbit-core.md`](./docs/sintesis-orbit-core.md)
+y [`./docs/investigacion/laboratorio-a-motor-de-fases.md`](./docs/investigacion/laboratorio-a-motor-de-fases.md)). Implementa
 el motor de orquestación de la Capa 1: `Phase`, `Envelope`, `Gate`, permisos post-hoc y trazado — generalizado
 fuera de SDLC, que es el dominio en el que vive el Laboratorio A (su fuente de investigación original).
 
@@ -43,7 +43,7 @@ eso se aísla sin tocar Capa 1.
 
 ## Cambios de una segunda ronda de investigación (Laboratorios F–H)
 
-Una ronda posterior de investigación de campo (ver `../investigacion/laboratorio-f-*.md` a
+Una ronda posterior de investigación de campo (ver `./docs/investigacion/laboratorio-f-*.md` a
 `laboratorio-h-*.md`) confirmó dos decisiones ya tomadas y motivó un cambio concreto:
 
 - **Confirmado:** `Trace` vive fuera de cualquier conversación de agente (SQLite externo). Un
@@ -80,7 +80,7 @@ Una ronda posterior de investigación de campo (ver `../investigacion/laboratori
   Zod, manifest generado con drift check, 3 skills reales propias. Pendiente: correr los evals de
   enrutamiento contra un juez real — ahora desbloqueado técnicamente (Capa 0 ya funciona), pero
   todavía no implementado.
-- **Multi-sustrato (resto de Capa 0, más allá de Claude Code).** Ver `../sintesis-orbit-core.md`
+- **Multi-sustrato (resto de Capa 0, más allá de Claude Code).** Ver `./docs/sintesis-orbit-core.md`
   sección 5 para el orden de ataque completo.
 - **`node:sqlite` sigue siendo experimental** en Node 22 (funciona, pero Node lo marca así). Si eso se vuelve
   un problema real de estabilidad, migrar a `better-sqlite3` es un cambio contenido a `trace.ts` — el resto

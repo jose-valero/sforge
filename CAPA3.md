@@ -2,7 +2,7 @@
 
 Ver [`DESIGN.md`](./DESIGN.md), [`CAPA0.md`](./CAPA0.md), [`CAPA2.md`](./CAPA2.md). Esta es la primera
 pieza de Capa 3 según el orden de ataque de
-[`../sintesis-orbit-core.md`](../sintesis-orbit-core.md) sección 5: el *mecanismo* del catálogo
+[`./docs/sintesis-orbit-core.md`](./docs/sintesis-orbit-core.md) sección 5: el *mecanismo* del catálogo
 (schema + manifest generado), con 3 skills reales propias — no cientos.
 
 ## Qué hay en `src/catalog/`

@@ -1,6 +1,6 @@
 # Capa 0 — enrutador de sustrato
 
-Ver [`DESIGN.md`](./DESIGN.md) para Capa 1 y [`../sintesis-orbit-core.md`](../sintesis-orbit-core.md)
+Ver [`DESIGN.md`](./DESIGN.md) para Capa 1 y [`./docs/sintesis-orbit-core.md`](./docs/sintesis-orbit-core.md)
 sección 3ter para por qué Capa 0 cambió de alcance (de "un adaptador fijo" a "un enrutador con
 fallback") antes de empezar a construirla.
 

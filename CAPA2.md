@@ -3,7 +3,7 @@
 Ver [`DESIGN.md`](./DESIGN.md) (Capa 1) y [`CAPA0.md`](./CAPA0.md) (Capa 0). Esta es la primera
 pieza de Capa 2 — por diseño, solo el aislamiento físico por worktree; el resto de la "Capa 2 —
 Pipeline de calidad" completa (revisores en paralelo, gate de riesgo de despliegue) queda para
-después, según el orden de ataque de [`../sintesis-orbit-core.md`](../sintesis-orbit-core.md)
+después, según el orden de ataque de [`./docs/sintesis-orbit-core.md`](./docs/sintesis-orbit-core.md)
 sección 5.
 
 ## Qué hay en `src/isolation/worktree.ts`

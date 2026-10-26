@@ -4,7 +4,7 @@ Primitivas agnósticas de dominio: ninguna sabe qué estás construyendo, solo c
 disciplina. Para el porqué de cada decisión: Capa 1 en [`DESIGN.md`](./DESIGN.md), Capa 0 en
 [`CAPA0.md`](./CAPA0.md), Capa 2 en [`CAPA2.md`](./CAPA2.md), Capa 3 en [`CAPA3.md`](./CAPA3.md). Para
 cómo encaja esto en el resto de `orbit-core`, ver
-[`../sintesis-orbit-core.md`](../sintesis-orbit-core.md).
+[`./docs/sintesis-orbit-core.md`](./docs/sintesis-orbit-core.md).
 
 ## Capa 1 — las piezas
 
