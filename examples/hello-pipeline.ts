@@ -5,7 +5,7 @@
 //
 // El "proyecto que se orquesta" es un repo git desechable en /tmp — nunca el
 // propio orbit-core ni el directorio del usuario. Nada de esto hace commit
-// ni toca git en "shadow fiend".
+// ni toca git en el repo de orbit-core.
 
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
