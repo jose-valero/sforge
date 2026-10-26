@@ -13,6 +13,7 @@
     "example:capa2": "tsx examples/capa2-worktree.ts",
     "example:capa3": "tsx examples/capa3-catalog.ts",
     "example:capa0-live": "tsx examples/capa0-live.ts",
+    "pipeline:live": "tsx examples/full-pipeline-live.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
