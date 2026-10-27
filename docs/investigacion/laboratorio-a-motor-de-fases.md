@@ -2,7 +2,7 @@
 
 Investigación interna sobre un patrón de orquestación de SDLC con agentes: código determinista posee
 secuenciación/reintentos/aceptación, agentes trabajan solo dentro de fases acotadas con contratos
-tipados. Base de la Capa 1 de orbit-core.
+tipados. Base de la Capa 1 de sforge.
 
 ## Resumen
 
@@ -147,22 +147,22 @@ El humano ("engineer") es una fase (`kind="engineer"`) que registra la petición
 8. **Acoplado a convención de proyecto único con git**: `commit_all` asume un repo git con un working tree; no hay abstracción para, por ejemplo, monorepos con múltiples repos git, o proyectos sin control de versiones.
 9. **El "control plane" es un conjunto de scripts Python invocados por CLI uno a la vez** (`uv run adws/adw_X.py`), no un daemon/servidor orquestador persistente; encadenar ADWs requiere que el humano (o un agente orquestador) decida manualmente el siguiente paso y pase `--adw-id`. No hay un "scheduler" que decida automáticamente qué ADW correr después según el resultado del anterior, salvo dentro de un único script (los bucles acotados de fix/test).
 
-## Qué rescatar para orbit-core
+## Qué rescatar para sforge
 
-Dado que orbit-core busca ser una **capa de orquestación agnóstica de dominio** (vs. un *harness* que contiene lógica específica de proyecto), varias piezas de SSSF son directamente trasplantables como **primitivas de la capa de orquestación**, separadas de cualquier lógica de negocio del proyecto concreto:
+Dado que sforge busca ser una **capa de orquestación agnóstica de dominio** (vs. un *harness* que contiene lógica específica de proyecto), varias piezas de SSSF son directamente trasplantables como **primitivas de la capa de orquestación**, separadas de cualquier lógica de negocio del proyecto concreto:
 
 1. **El primitivo de "fase" de 3 carriles (`engineer`/`agent`/`code`) como unidad atómica de trazabilidad y de "éxito debe ganarse"** — esto es puro mecanismo de orquestación, no depende del dominio. Vale la pena adoptarlo casi literal: todo run es una secuencia de fases con `kind`, `owner`, `description` obligatoria y no-trivial, estado por defecto `fail`.
-2. **El contrato de envelope tipado + "tríada sincronizada" (tipo/ejemplo-en-prompt/output_type)** como disciplina general para evitar *drift* — esto es agnóstico de dominio y resuelve un problema real en cualquier *software factory* con LLMs. Se puede generalizar como "regla de higiene" que orbit-core aplique a *cualquier* módulo específico de proyecto que defina sus propios tipos de salida.
+2. **El contrato de envelope tipado + "tríada sincronizada" (tipo/ejemplo-en-prompt/output_type)** como disciplina general para evitar *drift* — esto es agnóstico de dominio y resuelve un problema real en cualquier *software factory* con LLMs. Se puede generalizar como "regla de higiene" que sforge aplique a *cualquier* módulo específico de proyecto que defina sus propios tipos de salida.
 3. **Gates como verificación de afirmaciones post-hoc, desacoplados del contenido del dominio** — el *mecanismo* (`gate(envelope, run) -> GateReport`, violaciones listadas, reintentos acotados vía reprompt de la misma sesión) es agnóstico; lo que varía por proyecto es *qué* gates se registran (eso sí pertenece al "harness" específico del proyecto, análogo a `quality.py`).
 4. **Separación explícita `tools` (capacidad) vs. `writes`/permisos (frontera enforced en código, post-hoc, con rollback)** — este patrón de snapshot-antes/snapshot-después + rollback selectivo es un mecanismo de seguridad genérico y reutilizable para *cualquier* agente con acceso de escritura, independiente del dominio del proyecto.
-5. **El patrón de observabilidad de un solo camino de datos (sqlite WAL + polling por cursor, sin ingest endpoint)** — simple, robusto, y trasplantable como la capa de trazado de orbit-core; el esquema de eventos (`phase_start/agent_start/tool_call/handoff/gate_pass/gate_fail/log/agent_end/phase_end/error`) es un buen punto de partida genérico para cualquier *runner* multiagente, no solo para SDLC.
+5. **El patrón de observabilidad de un solo camino de datos (sqlite WAL + polling por cursor, sin ingest endpoint)** — simple, robusto, y trasplantable como la capa de trazado de sforge; el esquema de eventos (`phase_start/agent_start/tool_call/handoff/gate_pass/gate_fail/log/agent_end/phase_end/error`) es un buen punto de partida genérico para cualquier *runner* multiagente, no solo para SDLC.
 6. **Resumption de sesión vía `--adw-id` + mapa `agente→session_id` con detección de drift de modelo** — mecanismo genérico de orquestación para encadenar ejecuciones sin perder contexto, aplicable a cualquier *grafo* de trabajo con agentes, no solo a planificar/construir/revisar código.
-7. **La regla "si la invocación ya se conoce, es código, no agente"** — esto es más una heurística de diseño que un mecanismo, pero vale la pena llevarla a orbit-core como principio rector explícito en su propia documentación/skill, igual que SSSF lo hace como regla dura #8.
+7. **La regla "si la invocación ya se conoce, es código, no agente"** — esto es más una heurística de diseño que un mecanismo, pero vale la pena llevarla a sforge como principio rector explícito en su propia documentación/skill, igual que SSSF lo hace como regla dura #8.
 
-Lo que **NO** conviene llevar tal cual (porque es específico del dominio "SDLC de código" que SSSF modela, y debería vivir en el *harness* de cada proyecto concreto, no en la capa agnóstica de orbit-core):
+Lo que **NO** conviene llevar tal cual (porque es específico del dominio "SDLC de código" que SSSF modela, y debería vivir en el *harness* de cada proyecto concreto, no en la capa agnóstica de sforge):
 - Los agentes concretos (`planner`/`builder`/`scout`/`reviewer`/`documenter`) y sus prompts — son una instancia de dominio (ingeniería de software), no la orquestación en sí.
 - `quality.py` y sus bloques `test/lint/typecheck/build` — específicos de SDLC.
 - Los 12 ADWs arrancadores concretos — son recetas de dominio sobre el primitivo genérico de fases.
 - El acoplamiento a git/commits como la única forma de "codificar" output — útil para SDLC, no para "software factory" agnóstica de dominio en sentido amplio (aunque para construcción de software específicamente sigue siendo razonable).
 
-En síntesis: SSSF es un excelente ejemplo de **harness de dominio (ingeniería de software) construido sobre primitivas de orquestación limpias**. Para orbit-core, el valor está en extraer esas primitivas (fase, envelope+tríada, gate, permisos post-hoc, trazado de un solo camino, resumption de sesión) como la capa agnóstica, y tratar todo lo que SSSF llama "lo que se estampa y se dobla" (prompts, agentes, quality.py, ADWs concretos) como el equivalente a lo que orbit-core llamaría el *harness* específico de cada proyecto.
+En síntesis: SSSF es un excelente ejemplo de **harness de dominio (ingeniería de software) construido sobre primitivas de orquestación limpias**. Para sforge, el valor está en extraer esas primitivas (fase, envelope+tríada, gate, permisos post-hoc, trazado de un solo camino, resumption de sesión) como la capa agnóstica, y tratar todo lo que SSSF llama "lo que se estampa y se dobla" (prompts, agentes, quality.py, ADWs concretos) como el equivalente a lo que sforge llamaría el *harness* específico de cada proyecto.

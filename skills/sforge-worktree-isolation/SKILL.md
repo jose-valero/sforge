@@ -1,14 +1,14 @@
 ---
-name: orbit-core-worktree-isolation
+name: sforge-worktree-isolation
 description: >-
   Use when a task needs to run in its own isolated copy of a git repo before
   any agent touches it. NOT for deciding what paths an agent may write once
-  it's already isolated (that is orbit-core-permissions-policy) and NOT for
+  it's already isolated (that is sforge-permissions-policy) and NOT for
   designing the phases that run inside the worktree (that is
-  orbit-core-phase-design).
-tags: [orbit-core, capa-2, worktree, aislamiento, git]
-recommends: [orbit-core-permissions-policy, orbit-core-phase-design]
-origin: orbit-core
+  sforge-phase-design).
+tags: [sforge, capa-2, worktree, aislamiento, git]
+recommends: [sforge-permissions-policy, sforge-phase-design]
+origin: sforge
 profiles: [core]
 ---
 

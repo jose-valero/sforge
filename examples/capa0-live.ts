@@ -14,7 +14,7 @@ import { claudeCodeSubstrate } from "../src/substrates/claude-code.js";
 import { defineEnvelope } from "../src/envelope.js";
 import { envelopeSucceeded } from "../src/gate.js";
 
-const cwd = mkdtempSync(join(tmpdir(), "orbit-core-capa0-live-"));
+const cwd = mkdtempSync(join(tmpdir(), "sforge-capa0-live-"));
 const dbPath = join(cwd, "trace.db");
 
 const schema = defineEnvelope({ note: z.string().min(1) });

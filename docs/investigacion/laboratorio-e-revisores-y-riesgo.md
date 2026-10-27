@@ -80,12 +80,12 @@ Menciona (sin verificar, de oídas) que ingenieros de una empresa grande de IA c
 
 ## Anuncio: un producto mayor, no publicado aún
 
-Se anuncia textualmente que las dos pruebas de concepto (software factory + content factory) se están llevando a algo más grande, construido sobre la misma base del Laboratorio D, con intención de abrirlo como open source "pronto" — condicionado explícitamente a la respuesta/demanda de la demostración. **No hay nada público todavía** — es la pieza que vendría después del Laboratorio D en la misma línea de investigación, y confirma que esa misma línea está persiguiendo casi exactamente el mismo objetivo que orbit-core.
+Se anuncia textualmente que las dos pruebas de concepto (software factory + content factory) se están llevando a algo más grande, construido sobre la misma base del Laboratorio D, con intención de abrirlo como open source "pronto" — condicionado explícitamente a la respuesta/demanda de la demostración. **No hay nada público todavía** — es la pieza que vendría después del Laboratorio D en la misma línea de investigación, y confirma que esa misma línea está persiguiendo casi exactamente el mismo objetivo que sforge.
 
-## Qué añade esto a la síntesis de orbit-core
+## Qué añade esto a la síntesis de sforge
 
 1. **Confirma con un caso de uso real y en producción** (no solo teoría) la arquitectura de capas que ya propusimos: código determinista / agente acotado / aprobación humana opcional, con memoria persistente consultada *antes* de actuar — validación externa fuerte de la Capa 1 (motor de orquestación) que propusimos basada en el Laboratorio A.
 2. **Aporta un patrón nuevo no cubierto por los demás laboratorios**: diversidad deliberada de modelos entre builder y revisores como mecanismo anti-sesgo (el modelo que escribió el código nunca se revisa a sí mismo). Vale la pena añadirlo como principio de diseño de la Capa 2 (pipeline de calidad).
 3. **Aporta un segundo patrón nuevo**: un agente clasificador de riesgo que decide fast-path (auto-merge) vs. slow-path (aprobación humana obligatoria + hooks que lo fuerzan), separado del propio pipeline de construcción/revisión — una capa de "gate de despliegue" distinta del "gate de calidad" que el Laboratorio A ya cubre.
-4. **Generaliza el concepto fuera de SDLC** con el ejemplo de content factory — refuerza que orbit-core como capa agnóstica de dominio es una dirección correcta, no una abstracción forzada.
-5. **Es señal de mercado/timing**: la misma línea de investigación del Laboratorio D persigue este objetivo ahora mismo y aún no lo ha publicado — orbit-core no estaría inventando una categoría inexistente, sino construyendo en paralelo a donde ya se mueve la industria (cita también dos señales independientes de la industria).
+4. **Generaliza el concepto fuera de SDLC** con el ejemplo de content factory — refuerza que sforge como capa agnóstica de dominio es una dirección correcta, no una abstracción forzada.
+5. **Es señal de mercado/timing**: la misma línea de investigación del Laboratorio D persigue este objetivo ahora mismo y aún no lo ha publicado — sforge no estaría inventando una categoría inexistente, sino construyendo en paralelo a donde ya se mueve la industria (cita también dos señales independientes de la industria).

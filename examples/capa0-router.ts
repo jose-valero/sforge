@@ -18,7 +18,7 @@ import { buildHandoff, handoffPrompt } from "../src/substrates/handoff.js";
 import { defineEnvelope } from "../src/envelope.js";
 
 const schema = defineEnvelope({ note: z.string() });
-const dbPath = join(mkdtempSync(join(tmpdir(), "orbit-core-capa0-")), "trace.db");
+const dbPath = join(mkdtempSync(join(tmpdir(), "sforge-capa0-")), "trace.db");
 
 // --- 1. un sustrato "primario" que SIEMPRE falla, y uno de respaldo que funciona ---
 const primary = echoSubstrate(() => {

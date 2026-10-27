@@ -121,13 +121,13 @@ Ciclo de revisión hasta **5/5 sin hallazgos accionables**, con mecanismos anti-
 - El "scope check" es heurístico y manual, sin locking real.
 - `greploop-apps` es en la práctica un parche de UX sobre una limitación de Greptile, evidencia de indirección excesiva en algunos puntos.
 
-## Qué rescatar para orbit-core
+## Qué rescatar para sforge
 
-1. El patrón "AGENTS.md como orquestador declarativo + skills independientes con trigger condition propio" es trasplantable directamente: cada stage de orbit-core debería declarar su propia condición de activación en vez de vivir en un pipeline fijo hardcodeado.
+1. El patrón "AGENTS.md como orquestador declarativo + skills independientes con trigger condition propio" es trasplantable directamente: cada stage de sforge debería declarar su propia condición de activación en vez de vivir en un pipeline fijo hardcodeado.
 2. La fase "Prove" es la pieza más valiosa y generalizable: video/log anotado con assertions tipadas (`passed/failed/untested`) + manifest verificable + "reproducir el fallo antes del fix", generalizable con adaptadores por tipo de artefacto (UI, API, CLI, ML) en vez de un solo recorder de pantalla.
 3. Los mecanismos anti-trampa de `greploop` (rechazo de scores stale, verificación de head antes/después, prohibición de re-trigger innecesario, reporte honesto del resultado real) son un patrón reusable para cualquier "gate" de calidad automatizado del factory.
 4. `code-structure` es plantilla reusable para futuros "skills de arquitectura" (tabla Do/Don't + anti-patrones + mental model corto, siempre subordinado a la convención existente del proyecto).
 5. `unslop` es portable casi tal cual como stage transversal de higiene de comunicación para cualquier output textual de cualquier agente del factory.
-6. La convención worktree/branch por tarea-agente de `new-feature` es la base mínima de aislamiento si orbit-core correrá agentes en paralelo sobre el mismo repo.
+6. La convención worktree/branch por tarea-agente de `new-feature` es la base mínima de aislamiento si sforge correrá agentes en paralelo sobre el mismo repo.
 7. No rescatar el acoplamiento concreto a GitHub/Greptile/Vercel: abstraer detrás de interfaces "code review provider" y "visual evidence provider".
-8. Vacío que orbit-core debe llenar y que rstack no cubre: scaffolding inicial de proyecto, definición de requisitos, descomposición de trabajo — rstack empieza donde ya hay una tarea bien definida sobre un repo existente.
+8. Vacío que sforge debe llenar y que rstack no cubre: scaffolding inicial de proyecto, definición de requisitos, descomposición de trabajo — rstack empieza donde ya hay una tarea bien definida sobre un repo existente.

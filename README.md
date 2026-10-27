@@ -1,10 +1,10 @@
-# orbit-core — Capa 1 (motor) + Capa 0 (sustrato) + Capa 2 (aislamiento) + Capa 3 (catálogo), v0
+# SForge — Capa 1 (motor) + Capa 0 (sustrato) + Capa 2 (aislamiento) + Capa 3 (catálogo), v0
 
 Primitivas agnósticas de dominio: ninguna sabe qué estás construyendo, solo cómo ejecutarlo con
 disciplina. Para el porqué de cada decisión: Capa 1 en [`DESIGN.md`](./DESIGN.md), Capa 0 en
 [`CAPA0.md`](./CAPA0.md), Capa 2 en [`CAPA2.md`](./CAPA2.md), Capa 3 en [`CAPA3.md`](./CAPA3.md). Para
-cómo encaja esto en el resto de `orbit-core`, ver
-[`./docs/sintesis-orbit-core.md`](./docs/sintesis-orbit-core.md).
+cómo encaja esto en el resto de `sforge`, ver
+[`./docs/sintesis-sforge.md`](./docs/sintesis-sforge.md).
 
 ## Capa 1 — las piezas
 
@@ -49,8 +49,8 @@ cómo encaja esto en el resto de `orbit-core`, ver
   `skills/manifest.json`, filtra `recommends` a ids que de verdad existen, drift check tipo CI.
 - **`loadSkillEvals()` / `lintEvals()`** (`catalog/evals.ts`) — casos declarativos de enrutamiento
   (`should_trigger`/`route_to`) por skill, con lint estructural de referencias.
-- **`skills/`** — 3 skills reales sobre el propio orbit-core (`orbit-core-phase-design`,
-  `orbit-core-worktree-isolation`, `orbit-core-permissions-policy`), cruzadas entre sí con la
+- **`skills/`** — 3 skills reales sobre el propio sforge (`sforge-phase-design`,
+  `sforge-worktree-isolation`, `sforge-permissions-policy`), cruzadas entre sí con la
   convención "NOT x (that is sibling)".
 
 ## Probarlo

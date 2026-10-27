@@ -4,8 +4,8 @@
 //   escritura fuera de lo permitido, para probar deteccion + revert) -> finish.
 //
 // El "proyecto que se orquesta" es un repo git desechable en /tmp — nunca el
-// propio orbit-core ni el directorio del usuario. Nada de esto hace commit
-// ni toca git en el repo de orbit-core.
+// propio sforge ni el directorio del usuario. Nada de esto hace commit
+// ni toca git en el repo de sforge.
 
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -21,7 +21,7 @@ import { gitWorkspaceAdapter, enforceWrites } from "../src/permissions.js";
 import { Trace } from "../src/trace.js";
 
 // --- 0. sandbox desechable para demostrar permisos sin tocar nada real ---
-const sandbox = mkdtempSync(join(tmpdir(), "orbit-core-demo-"));
+const sandbox = mkdtempSync(join(tmpdir(), "sforge-demo-"));
 execFileSync("git", ["init", "-q"], { cwd: sandbox });
 execFileSync("git", ["commit", "--allow-empty", "-q", "-m", "init"], { cwd: sandbox });
 mkdirSync(join(sandbox, "allowed"), { recursive: true });

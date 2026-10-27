@@ -47,7 +47,7 @@ los Laboratorios A–F había propuesto esto como una dimensión explícita del 
 
 **Por qué importa:** nuestro `Trace` (Capa 1) ya registra eventos, pero no tiene ningún campo
 pensado para costo/tokens/duración. Es una extensión barata y bien justificada — ver el cambio
-aplicado en `orbit-core/src/trace.ts` esta misma sesión.
+aplicado en `sforge/src/trace.ts` esta misma sesión.
 
 ## Nota: la segunda pieza revisada, descartada
 
@@ -58,7 +58,7 @@ mecánico por los Laboratorios A y E, sin ningún mecanismo, métrica o patrón 
 nuestra investigación. Se documenta aquí solo para dejar constancia de que se revisó y se decidió
 conscientemente no construir un laboratorio aparte para ella — no por descuido.
 
-## Qué rescatar para orbit-core
+## Qué rescatar para sforge
 
 1. Adoptar el vocabulario "loop engineering" internamente para describir el mecanismo de
    reintento-con-feedback de `ph.call()` — ya construido, solo le faltaba nombre.

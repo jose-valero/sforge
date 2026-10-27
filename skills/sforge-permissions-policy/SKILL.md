@@ -1,14 +1,14 @@
 ---
-name: orbit-core-permissions-policy
+name: sforge-permissions-policy
 description: >-
   Use when deciding what paths a specific agent is allowed to write inside
   an already-isolated workspace. NOT for isolating the task physically from
-  the main repo (that is orbit-core-worktree-isolation) and NOT for the
+  the main repo (that is sforge-worktree-isolation) and NOT for the
   phase/gate mechanics around the agent call itself (that is
-  orbit-core-phase-design).
-tags: [orbit-core, capa-1, capa-2, permisos, seguridad]
-recommends: [orbit-core-worktree-isolation]
-origin: orbit-core
+  sforge-phase-design).
+tags: [sforge, capa-1, capa-2, permisos, seguridad]
+recommends: [sforge-worktree-isolation]
+origin: sforge
 profiles: [core]
 ---
 

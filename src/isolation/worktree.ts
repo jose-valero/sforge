@@ -3,7 +3,7 @@
 // principal. Esto se combina con los permisos REACTIVOS de Capa 1
 // (snapshot/diff/revert, src/permissions.ts) como red de seguridad
 // adicional DENTRO del worktree — las dos capas trabajan juntas, ninguna
-// sustituye a la otra (ver sintesis-orbit-core.md, seccion 3).
+// sustituye a la otra (ver sintesis-sforge.md, seccion 3).
 
 import { execFile } from "node:child_process";
 import { randomBytes } from "node:crypto";

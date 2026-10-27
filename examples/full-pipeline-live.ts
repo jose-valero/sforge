@@ -27,7 +27,7 @@ import { gitWorkspaceAdapter, enforceWrites } from "../src/permissions.js";
 import { checkIsolation, createWorktree } from "../src/isolation/worktree.js";
 import { startTraceViewer } from "../src/observability/trace-server.js";
 
-const repoPath = dirname(dirname(fileURLToPath(import.meta.url))); // .../orbit-core
+const repoPath = dirname(dirname(fileURLToPath(import.meta.url))); // .../sforge
 const MODULE = process.argv[2] ?? "gate";
 const SOURCE_FILE_REL = `src/${MODULE}.ts`;
 const TEST_FILE_REL = `src/${MODULE}.test.ts`;

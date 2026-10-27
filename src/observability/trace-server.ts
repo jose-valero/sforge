@@ -15,7 +15,7 @@ const PAGE = `<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>orbit-core — traza en vivo</title>
+<title>sforge — traza en vivo</title>
 <style>
   body { font-family: ui-monospace, "SF Mono", Menlo, monospace; background:#0d1117; color:#c9d1d9; margin:0; padding:24px; }
   h1 { font-size:15px; color:#58a6ff; margin:0 0 4px; letter-spacing:.02em; }
@@ -34,7 +34,7 @@ const PAGE = `<!doctype html>
 </style>
 </head>
 <body>
-<h1>orbit-core — traza en vivo</h1>
+<h1>sforge — traza en vivo</h1>
 <div id="meta"></div>
 <div id="status">conectando…</div>
 <div id="events"></div>

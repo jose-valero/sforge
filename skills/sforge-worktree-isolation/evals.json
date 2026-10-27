@@ -13,13 +13,13 @@
     {
       "prompt": "¿Qué carpetas puede tocar este agente dentro del worktree que ya cree?",
       "should_trigger": false,
-      "route_to": "orbit-core-permissions-policy",
+      "route_to": "sforge-permissions-policy",
       "why": "eso es política de escritura, no aislamiento físico del worktree en sí"
     },
     {
       "prompt": "¿Cómo defino el schema del envelope para la fase que corre dentro del worktree?",
       "should_trigger": false,
-      "route_to": "orbit-core-phase-design",
+      "route_to": "sforge-phase-design",
       "why": "diseño de fase/envelope, no aislamiento"
     }
   ]

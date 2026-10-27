@@ -1,7 +1,7 @@
 // Un solo camino de datos: los agentes/fases escriben, cualquier lector hace
 // poll. Sin ingest endpoint, sin websocket. node:sqlite es nativo de Node 22+
 // (sin dependencias binarias que compilar) — por eso lo elegimos sobre
-// better-sqlite3 para esta capa: orbit-core debe instalarse en cualquier
+// better-sqlite3 para esta capa: sforge debe instalarse en cualquier
 // maquina sin fricciones de compilacion.
 
 import { DatabaseSync, type StatementSync } from "node:sqlite";

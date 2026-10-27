@@ -2,13 +2,13 @@
 
 Ver [`DESIGN.md`](./DESIGN.md), [`CAPA0.md`](./CAPA0.md), [`CAPA2.md`](./CAPA2.md). Esta es la primera
 pieza de Capa 3 según el orden de ataque de
-[`./docs/sintesis-orbit-core.md`](./docs/sintesis-orbit-core.md) sección 5: el *mecanismo* del catálogo
+[`./docs/sintesis-sforge.md`](./docs/sintesis-sforge.md) sección 5: el *mecanismo* del catálogo
 (schema + manifest generado), con 3 skills reales propias — no cientos.
 
 ## Qué hay en `src/catalog/`
 
 - **`types.ts`** — `SkillFrontmatter` (Zod, no JSON Schema + ajv): nombre `lowercase-con-guiones`,
-  descripción, tags, `recommends`, `origin`, `profiles`. Un solo validador en todo orbit-core, no
+  descripción, tags, `recommends`, `origin`, `profiles`. Un solo validador en todo sforge, no
   dos.
 - **`parse.ts`** — `parseSkillFile()`: lee `SKILL.md`, separa frontmatter YAML (`js-yaml`, única
   dependencia nueva de esta capa) del cuerpo, valida contra el schema, confirma que
@@ -22,10 +22,10 @@ pieza de Capa 3 según el orden de ataque de
 
 ## Qué hay en `skills/` (3 skills reales, no cientos)
 
-- `orbit-core-phase-design` — diseñar Phase/Envelope/Gate.
-- `orbit-core-worktree-isolation` — aislamiento físico (incluye el bug real de Capa 2 documentado
+- `sforge-phase-design` — diseñar Phase/Envelope/Gate.
+- `sforge-worktree-isolation` — aislamiento físico (incluye el bug real de Capa 2 documentado
   ahí mismo, para que no se repita).
-- `orbit-core-permissions-policy` — qué puede escribir un agente.
+- `sforge-permissions-policy` — qué puede escribir un agente.
 
 Cada una usa la convención "NOT x (that is sibling)" en su `description` y se recomienda a las
 otras dos vía `recommends` — un grafo de 3 nodos completamente conectado, confirmado por el ejemplo

@@ -1,9 +1,9 @@
 {
-  "name": "orbit-core",
+  "name": "sforge",
   "version": "0.0.1",
   "private": true,
   "type": "module",
-  "description": "Capa 1 de orbit-core: motor de orquestacion agnostico de dominio (Phase / Envelope / Gate / Permisos / Trace).",
+  "description": "Capa 1 de sforge: motor de orquestacion agnostico de dominio (Phase / Envelope / Gate / Permisos / Trace).",
   "engines": {
     "node": ">=22.5.0"
   },

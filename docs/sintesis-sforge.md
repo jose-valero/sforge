@@ -1,4 +1,4 @@
-# Síntesis: de 8 laboratorios a orbit-core
+# Síntesis: de 8 laboratorios a SForge
 
 Base: ocho líneas de investigación interna propia, documentadas en [`investigacion/`](investigacion/)
 (Laboratorios A–H — A–E de la primera ronda, F–H de una segunda ronda hecha ya con Capa 1 construida,
@@ -35,9 +35,9 @@ Conclusión: **ninguno de los cuatro es "la factory" completa**. El Laboratorio 
 
 ## 3. Solapamientos reales (no hay que llevarse todo)
 
-- **Los gates internos del Laboratorio A** y **el gate de revisión externo del Laboratorio C** resuelven el mismo problema (criterio de "terminado" verificable) a distinta escala: A es determinista sobre un envelope; C es un juez externo con mecanismos anti-trampa. orbit-core debería tener **un solo concepto de "gate"** con dos implementaciones posibles (interno/determinista vs. externo/juez), no dos sistemas paralelos.
+- **Los gates internos del Laboratorio A** y **el gate de revisión externo del Laboratorio C** resuelven el mismo problema (criterio de "terminado" verificable) a distinta escala: A es determinista sobre un envelope; C es un juez externo con mecanismos anti-trampa. sforge debería tener **un solo concepto de "gate"** con dos implementaciones posibles (interno/determinista vs. externo/juez), no dos sistemas paralelos.
 - **El árbol c1-c8 del Laboratorio B** y **el catálogo de skills/memoria del Laboratorio D** describen casi la misma cosa (qué compone un harness) desde ángulos distintos: B lo hace formal y versionable; D lo hace práctico e instalable. Son complementarios, no redundantes — B da el *esquema*, D da el *mecanismo de instalación y portabilidad*.
-- **Los permisos reactivos del Laboratorio A** (snapshot + diff) y **el aislamiento por worktree del Laboratorio C** atacan el mismo riesgo (un agente daña el repo) en capas distintas: A es reactivo dentro de un mismo working tree; C es preventivo vía aislamiento físico. orbit-core adopta **ambos, en capas**: aislamiento físico primero, detección/rollback como red de seguridad adicional.
+- **Los permisos reactivos del Laboratorio A** (snapshot + diff) y **el aislamiento por worktree del Laboratorio C** atacan el mismo riesgo (un agente daña el repo) en capas distintas: A es reactivo dentro de un mismo working tree; C es preventivo vía aislamiento físico. sforge adopta **ambos, en capas**: aislamiento físico primero, detección/rollback como red de seguridad adicional.
 
 ## 3bis. Dos patrones del Laboratorio E (no estaban en A–D)
 
@@ -76,11 +76,11 @@ cambio real de alcance para la Capa 0 que viene:
   tipo "qué es una AI software factory" no aportó ningún mecanismo nuevo — se documenta que se
   revisó, para no tener que releerla.
 
-## 4. Arquitectura en capas de orbit-core
+## 4. Arquitectura en capas de sforge
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│ Capa 4 — Harness de proyecto (NO es parte de orbit-core) │
+│ Capa 4 — Harness de proyecto (NO es parte de sforge) │
 │ Agentes/prompts/criterios de calidad específicos de       │
 │ cada proyecto                                              │
 ├─────────────────────────────────────────────────────────┤
@@ -105,7 +105,7 @@ cambio real de alcance para la Capa 0 que viene:
 └─────────────────────────────────────────────────────────┘
 ```
 
-Cada capa es trasplantable con bastante literalidad desde su laboratorio de origen — ya está detallado en el "Qué rescatar para orbit-core" de cada archivo en `investigacion/`. Lo que NO debería entrar en la Capa 0-3 (porque es lógica de negocio, no factory): los agentes concretos del Laboratorio A (`planner`/`builder`/...), los cientos de skills concretos del Laboratorio D (son contenido del catálogo, no el mecanismo del catálogo), y toda la maquinaria de meta-optimización del Laboratorio B (es investigación, no algo que corra en caliente por tarea).
+Cada capa es trasplantable con bastante literalidad desde su laboratorio de origen — ya está detallado en el "Qué rescatar para sforge" de cada archivo en `investigacion/`. Lo que NO debería entrar en la Capa 0-3 (porque es lógica de negocio, no factory): los agentes concretos del Laboratorio A (`planner`/`builder`/...), los cientos de skills concretos del Laboratorio D (son contenido del catálogo, no el mecanismo del catálogo), y toda la maquinaria de meta-optimización del Laboratorio B (es investigación, no algo que corra en caliente por tarea).
 
 **Estado actual**: las cuatro capas tienen un v0 real y probado — **Capa 0 incluida, en vivo**, no solo con stubs. El bloqueo de credenciales inicial (`claude` sin login propio) se resolvió con `claude auth login`; `claudeCodeSubstrate` corrió de punta a punta contra un modelo real (`npm run example:capa0-live`, gasta cuota real a propósito — separado de los demás ejemplos que son gratis): el envelope parseó, el gate pasó, y el costo real (tokens + USD) quedó grabado en la traza, no como placeholder. Capa 1: `Phase`/`Envelope`/`Gate`/permisos/trazado. Capa 2: aislamiento físico por worktree + permisos de Capa 1 juntos (`../CAPA2.md`). Capa 3: catálogo con schema Zod, manifest con drift check, 3 skills reales cruzadas entre sí (`../CAPA3.md`). Falta el resto del pipeline de calidad de Capa 2 (revisores en paralelo, gate de riesgo) y correr los evals de Capa 3 contra un juez real — ya no bloqueado por credenciales, solo pendiente de construirse.
 
@@ -127,12 +127,12 @@ Orden de ataque recomendado, de más a menos maduro/barato de construir:
    construirse.
 4. **Capa 3 (catálogo de capacidades)** — ✅ hecho (v0): schema con Zod (no una segunda librería de
    validación), manifest generado con drift check, evals de enrutamiento linteados, 3 skills reales
-   sobre el propio orbit-core (no cientos), probado de verdad incluyendo el lado del fallo
+   sobre el propio sforge (no cientos), probado de verdad incluyendo el lado del fallo
    (`npm run example:capa3` + un chequeo negativo corrido aparte). Pendiente: ejecutar los evals
    contra un juez real — técnicamente desbloqueado, todavía sin implementar.
-5. **Meta-optimización (lab. B)** — ignorar por completo hasta que orbit-core tenga al menos un proyecto real funcionando con las capas 0-3. Es la pieza de mayor costo y menor urgencia.
+5. **Meta-optimización (lab. B)** — ignorar por completo hasta que sforge tenga al menos un proyecto real funcionando con las capas 0-3. Es la pieza de mayor costo y menor urgencia.
 
-**Milestone de éxito**: no "la arquitectura de 5 capas está completa", sino "usé orbit-core para llevar una tarea real de mi propio proyecto de punta a punta, con traza completa y al menos un gate automático". Las cuatro capas tienen ya un v0 probado por separado — incluida Capa 0 en vivo. Lo que falta para el milestone completo es encadenarlas en un solo pipeline real, no desbloquear nada más.
+**Milestone de éxito**: no "la arquitectura de 5 capas está completa", sino "usé sforge para llevar una tarea real de mi propio proyecto de punta a punta, con traza completa y al menos un gate automático". Las cuatro capas tienen ya un v0 probado por separado — incluida Capa 0 en vivo. Lo que falta para el milestone completo es encadenarlas en un solo pipeline real, no desbloquear nada más.
 
 ## 6. Próximo paso sugerido
 

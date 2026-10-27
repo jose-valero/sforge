@@ -3,7 +3,7 @@
 // hermana deberian enrutarse. Aqui solo vive el MECANISMO (schema +
 // validacion estructural + lint de referencias). Juzgar cada caso de
 // verdad contra un modelo requiere un sustrato real — bloqueado igual que
-// Capa 0 (ver orbit-core/CAPA0.md), no es parte de este archivo.
+// Capa 0 (ver sforge/CAPA0.md), no es parte de este archivo.
 
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";

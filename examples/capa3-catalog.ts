@@ -1,5 +1,5 @@
 // Prueba de punta a punta de Capa 3: escanea skills/ (3 skills reales sobre
-// el propio orbit-core, no cientos inventadas), genera el manifest,
+// el propio sforge, no cientos inventadas), genera el manifest,
 // confirma que no hay drift contra el manifest en disco, y lintea los
 // evals de enrutamiento. Nada de esto invoca un modelo — eso queda
 // bloqueado igual que Capa 0 (ver CAPA0.md); lo que se prueba aqui es el

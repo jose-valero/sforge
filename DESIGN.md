@@ -1,6 +1,6 @@
 # Capa 1 — decisiones de diseño
 
-Este paquete es la primera pieza real de `orbit-core` (ver [`./docs/sintesis-orbit-core.md`](./docs/sintesis-orbit-core.md)
+Este paquete es la primera pieza real de `sforge` (ver [`./docs/sintesis-sforge.md`](./docs/sintesis-sforge.md)
 y [`./docs/investigacion/laboratorio-a-motor-de-fases.md`](./docs/investigacion/laboratorio-a-motor-de-fases.md)). Implementa
 el motor de orquestación de la Capa 1: `Phase`, `Envelope`, `Gate`, permisos post-hoc y trazado — generalizado
 fuera de SDLC, que es el dominio en el que vive el Laboratorio A (su fuente de investigación original).
@@ -14,7 +14,7 @@ concretas, no por preferencia personal:
    runtime que su sustrato más importante se integra con menos fricción (hooks, MCP servers, `settings.json`
    son todos JSON/JS-nativos).
 2. **El modelo de distribución que ya validó el Laboratorio D** (la investigación que más se parece a "cómo se
-   instala esto en un proyecto real") es un paquete npm instalable con `npx`. Si `orbit-core` también crece
+   instala esto en un proyecto real") es un paquete npm instalable con `npx`. Si `sforge` también crece
    hacia eso, empezar en el mismo ecosistema evita una migración después.
 3. **Zod es un equivalente directo de Pydantic** para el patrón de "tríada sincronizada" (schema, ejemplo en
    el prompt, `output_type` del sitio de llamada) que el Laboratorio A usa — no se pierde rigor de tipos al
@@ -80,7 +80,7 @@ Una ronda posterior de investigación de campo (ver `./docs/investigacion/labora
   Zod, manifest generado con drift check, 3 skills reales propias. Pendiente: correr los evals de
   enrutamiento contra un juez real — ahora desbloqueado técnicamente (Capa 0 ya funciona), pero
   todavía no implementado.
-- **Multi-sustrato (resto de Capa 0, más allá de Claude Code).** Ver `./docs/sintesis-orbit-core.md`
+- **Multi-sustrato (resto de Capa 0, más allá de Claude Code).** Ver `./docs/sintesis-sforge.md`
   sección 5 para el orden de ataque completo.
 - **`node:sqlite` sigue siendo experimental** en Node 22 (funciona, pero Node lo marca así). Si eso se vuelve
   un problema real de estabilidad, migrar a `better-sqlite3` es un cambio contenido a `trace.ts` — el resto
@@ -100,4 +100,4 @@ este repo) y demuestra, con assertions reales, no solo con `console.log`:
 4. El trazado queda grabado en SQLite con WAL, consultable por cursor — 12 eventos en orden, un solo camino
    de datos.
 
-Correrlo: `npm install && npm run example` (dentro de `orbit-core/`).
+Correrlo: `npm install && npm run example` (dentro de `sforge/`).

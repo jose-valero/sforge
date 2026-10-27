@@ -23,12 +23,12 @@ Python, Node ni Docker instalados para *correr el motor en sí*. Es una propuest
 fuerte que la nuestra: nuestra Capa 1 asume Node 22+ instalado.
 
 **Por qué no cambiamos de decisión:** nuestra razón para TypeScript/Node (documentada en
-`orbit-core/DESIGN.md`) es que el sustrato principal que vamos a orquestar — tu asistente de IA de
+`sforge/DESIGN.md`) es que el sustrato principal que vamos a orquestar — tu asistente de IA de
 hoy — ya es un CLI de Node, y los hooks/configuración que necesitaremos cablear en Capa 0 son
 JSON/JS-nativos. Un binario sin dependencias es una ventaja real de distribución, pero resuelve un
 problema (instalar un runtime) que en nuestro caso específico ya está resuelto porque el runtime ya
 tiene que estar ahí para el propio sustrato. Vale la pena re-evaluar esto solo si algún día
-distribuimos orbit-core para gente que NO usa ya un sustrato basado en Node — no es el caso hoy.
+distribuimos sforge para gente que NO usa ya un sustrato basado en Node — no es el caso hoy.
 
 ### Enrutamiento de modelo declarativo, con fallback automático
 
@@ -67,7 +67,7 @@ consulta por cursor (`since(runId, cursor)`) que es exactamente el tipo de primi
 construye un stream de eventos en vivo — no haría falta rediseñar el trazado para soportar esto
 eventualmente, solo añadir un transporte encima.
 
-## Qué rescatar para orbit-core
+## Qué rescatar para sforge
 
 1. **El `Substrate` de Capa 0 debería nacer como un enrutador con reglas declarativas y fallback**,
    no como un adaptador único fijo — esto cambia el alcance de lo que construimos a continuación, de

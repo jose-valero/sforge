@@ -1,7 +1,7 @@
 // Prueba de punta a punta de Capa 2: aislamiento FISICO por worktree
 // (Laboratorio C) combinado con los permisos REACTIVOS de Capa 1 ya
 // construidos (snapshot/diff/revert) operando DENTRO del worktree — las
-// dos capas de seguridad juntas, tal como quedo en sintesis-orbit-core.md
+// dos capas de seguridad juntas, tal como quedo en sintesis-sforge.md
 // seccion 3. Corre contra un repo desechable en /tmp; nunca toca este repo.
 
 import { mkdtempSync, existsSync, writeFileSync } from "node:fs";
@@ -12,7 +12,7 @@ import { execFileSync } from "node:child_process";
 import { checkIsolation, createWorktree, removeWorktree } from "../src/isolation/worktree.js";
 import { gitWorkspaceAdapter, enforceWrites } from "../src/permissions.js";
 
-const repoPath = mkdtempSync(join(tmpdir(), "orbit-core-capa2-"));
+const repoPath = mkdtempSync(join(tmpdir(), "sforge-capa2-"));
 execFileSync("git", ["init", "-q"], { cwd: repoPath });
 execFileSync("git", ["config", "user.email", "demo@example.com"], { cwd: repoPath });
 execFileSync("git", ["config", "user.name", "demo"], { cwd: repoPath });

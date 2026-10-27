@@ -13,13 +13,13 @@
     {
       "prompt": "¿Cómo aíslo esta tarea en su propio worktree antes de que el agente toque nada?",
       "should_trigger": false,
-      "route_to": "orbit-core-worktree-isolation",
+      "route_to": "sforge-worktree-isolation",
       "why": "es aislamiento físico del repo, no diseño de fase/gate"
     },
     {
       "prompt": "¿Qué rutas debería poder escribir este agente en particular?",
       "should_trigger": false,
-      "route_to": "orbit-core-permissions-policy",
+      "route_to": "sforge-permissions-policy",
       "why": "es política de permisos, no la mecánica de la fase en sí"
     }
   ]

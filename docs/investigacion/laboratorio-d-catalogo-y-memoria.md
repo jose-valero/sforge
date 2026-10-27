@@ -222,15 +222,15 @@ Estructura (`manifest.json` top-level): `version`, `counts` (`skills: 269, agent
 
 ---
 
-## Qué rescatar para orbit-core
+## Qué rescatar para sforge
 
-1. **El patrón de adaptador de 3 capas para portabilidad multi-target**: `targets/index.js` separa (a) una tabla declarativa `SPEC` por plataforma, de (b) un conjunto pequeño de **adaptadores reales** (`claude`, `cursor`, `md` — solo 3 para 18 plataformas), de (c) la **fuente única de contenido** (`.rsc/skills/<id>/`) enlazada por symlink/copia. Para orbit-core: nunca escribir contenido específico de plataforma por plataforma; mantener contenido canónico y una tabla de proyección por runtime, con fallback a copia física solo donde el symlink no sea viable (ver `linkOrCopy()`).
+1. **El patrón de adaptador de 3 capas para portabilidad multi-target**: `targets/index.js` separa (a) una tabla declarativa `SPEC` por plataforma, de (b) un conjunto pequeño de **adaptadores reales** (`claude`, `cursor`, `md` — solo 3 para 18 plataformas), de (c) la **fuente única de contenido** (`.rsc/skills/<id>/`) enlazada por symlink/copia. Para sforge: nunca escribir contenido específico de plataforma por plataforma; mantener contenido canónico y una tabla de proyección por runtime, con fallback a copia física solo donde el symlink no sea viable (ver `linkOrCopy()`).
 
-2. **Frontmatter con esquema validado + manifest generado y nunca editado a mano.** El patrón `SKILL.md` → `schema/frontmatter.schema.json` (ajv) → `manifest.json` generado por `build-manifest.js`, con CI que falla si el manifest está desactualizado, es directamente aplicable como la "unidad de catálogo" de orbit-core.
+2. **Frontmatter con esquema validado + manifest generado y nunca editado a mano.** El patrón `SKILL.md` → `schema/frontmatter.schema.json` (ajv) → `manifest.json` generado por `build-manifest.js`, con CI que falla si el manifest está desactualizado, es directamente aplicable como la "unidad de catálogo" de sforge.
 
 3. **La convención "NOT x (that is `sibling`)" como mecanismo de desambiguación distribuido**, que resuelve routing entre capacidades sin árbol de decisión central mantenido a mano — escala mejor en un catálogo que crece constantemente.
 
-4. **Evals de routing declarativos (`evals/cases.yaml` con `should_trigger` / `should_not_trigger` / `route_to` / `capability`)** como contrato de calidad por módulo, trasplantable tal cual como mecanismo de CI para cualquier catálogo de capacidades de orbit-core.
+4. **Evals de routing declarativos (`evals/cases.yaml` con `should_trigger` / `should_not_trigger` / `route_to` / `capability`)** como contrato de calidad por módulo, trasplantable tal cual como mecanismo de CI para cualquier catálogo de capacidades de sforge.
 
 5. **La separación entre "memoria del workspace" (`02-DOCS/` + `01-TOOLS/`, formato OKF) y "selección de capacidades" (skills)**, que mapea bien a una capa de conocimiento del proyecto concreto separada de una capa de capacidades reusables entre proyectos — mezclarlas es justo el "Frankenstein harness" que el propio README advierte evitar.
 
@@ -240,4 +240,4 @@ Estructura (`manifest.json` top-level): `version`, `counts` (`skills: 269, agent
 
 8. **Guardas que fallan abierto, con interruptor documentado por proyecto**, y honestidad explícita sobre qué runtime las hace cumplir de verdad vs. cuáles son solo prosa seguida por el agente.
 
-9. **Lección por lo contrario**: el acoplamiento fuerte a Claude Code para los mecanismos "duros" es una advertencia — si orbit-core aspira a portabilidad real entre harnesses, el equivalente a esas guardas necesita un diseño de "mecanismo mínimo garantizado en cualquier runtime soportado" desde el principio, no nacer atado a un solo asistente.
+9. **Lección por lo contrario**: el acoplamiento fuerte a Claude Code para los mecanismos "duros" es una advertencia — si sforge aspira a portabilidad real entre harnesses, el equivalente a esas guardas necesita un diseño de "mecanismo mínimo garantizado en cualquier runtime soportado" desde el principio, no nacer atado a un solo asistente.

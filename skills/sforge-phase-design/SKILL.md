@@ -1,17 +1,17 @@
 ---
-name: orbit-core-phase-design
+name: sforge-phase-design
 description: >-
   Use when designing a new Phase (engineer/agent/code), Envelope, or Gate for
-  an orbit-core pipeline. NOT for physical isolation of a task (that is
-  orbit-core-worktree-isolation) and NOT for deciding what an agent may write
-  (that is orbit-core-permissions-policy).
-tags: [orbit-core, capa-1, phase, envelope, gate]
-recommends: [orbit-core-worktree-isolation, orbit-core-permissions-policy]
-origin: orbit-core
+  an sforge pipeline. NOT for physical isolation of a task (that is
+  sforge-worktree-isolation) and NOT for deciding what an agent may write
+  (that is sforge-permissions-policy).
+tags: [sforge, capa-1, phase, envelope, gate]
+recommends: [sforge-worktree-isolation, sforge-permissions-policy]
+origin: sforge
 profiles: [core]
 ---
 
-# Diseñar una fase de orbit-core
+# Diseñar una fase de sforge
 
 ## El primitivo
 

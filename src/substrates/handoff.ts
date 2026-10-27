@@ -59,7 +59,7 @@ export function buildHandoff(opts: {
 export function handoffPrompt(pkg: HandoffPackage): string {
   return (
     `${pkg.brief}\n\n` +
-    `Este es un traspaso de contexto entre sustratos dentro del mismo run de orbit-core — ` +
+    `Este es un traspaso de contexto entre sustratos dentro del mismo run de sforge — ` +
     `no es una tarea nueva, es continuacion. Si necesitas mas detalle del que trae este resumen, ` +
     `consulta la traza completa del run.`
   );

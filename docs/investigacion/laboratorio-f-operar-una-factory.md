@@ -26,7 +26,7 @@ pero más seguido termina pisando el trabajo de un subagente, sobrescribiéndolo
 loops. El autor lo compara con cualquier manager recién ascendido que no logra soltar el trabajo
 operativo. Observado con **todos** los modelos probados, en distinto grado.
 
-**Por qué importa para orbit-core:** esto es un argumento de peso para una práctica concreta que
+**Por qué importa para sforge:** esto es un argumento de peso para una práctica concreta que
 nuestra Capa 1 ya puede imponer sin cambios: a un agente con rol "orquestador" se le debería asignar
 un `allow` **vacío o casi vacío** en `permissions.ts` — el mismo mecanismo de detección/revert que
 ya construimos, aplicado como política por defecto a cualquier agente cuyo trabajo es delegar, no
@@ -105,7 +105,7 @@ futura Capa 3 (o una "Capa 2.5" de reporting), no urgente para Capa 0/1 hoy.
   comunicación del Laboratorio C ("unslop"), ahora con evidencia de campo de que es un problema real
   y creciente, no cosmético.
 
-## Qué rescatar para orbit-core
+## Qué rescatar para sforge
 
 1. **Política de `allow` vacío para agentes con rol "orquestador"** — documentar como práctica
    recomendada de Capa 2, reusando el mecanismo de permisos ya construido en Capa 1, sin cambios de

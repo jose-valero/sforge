@@ -1,7 +1,7 @@
 // Formato de skill (Laboratorio D): frontmatter YAML validado + cuerpo en
 // markdown. Usamos Zod para la validacion estructural en vez de JSON
 // Schema + ajv (que era la eleccion del laboratorio de origen) porque Zod
-// ya es la unica libreria de validacion de todo orbit-core (Capa 1) — dos
+// ya es la unica libreria de validacion de todo sforge (Capa 1) — dos
 // librerias para el mismo trabajo seria duplicar sin razon.
 
 import { z } from "zod";
@@ -16,7 +16,7 @@ export const SkillFrontmatter = z.object({
     .max(1024, "demasiado larga — una skill, no un ensayo"),
   tags: z.array(z.string()).min(1, "al menos una etiqueta, para que `consult` la pueda encontrar"),
   recommends: z.array(z.string()).optional(),
-  origin: z.string().default("orbit-core"),
+  origin: z.string().default("sforge"),
   profiles: z.array(z.enum(["minimal", "core", "full"])).optional(),
 });
 export type SkillFrontmatter = z.infer<typeof SkillFrontmatter>;
